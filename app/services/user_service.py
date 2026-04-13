@@ -27,4 +27,4 @@ class UserService:
             db.session.rollback()
             return jsonify({"error": str(e)}), 400
         
-        return jsonify({"message": "User created successfully!"}), 200
+        return jsonify({"message": "User created successfully!"}), 201

@@ -56,8 +56,8 @@ class TransactionService:
         end_date = datetime.strptime(end_date, '%Y-%m-%d')
         transactions = Transaction.query.filter(
             Transaction.user_id == user_id,
-            Transaction.date >= start_date,
-            Transaction.date <= end_date
+            Transaction.at_date >= start_date,
+            Transaction.at_date <= end_date
         ).all()
         return [transaction.to_dict() for transaction in transactions]
     

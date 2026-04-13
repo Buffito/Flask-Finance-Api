@@ -32,7 +32,7 @@ class Transaction(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     type_id = db.Column(db.Integer, db.ForeignKey('transaction_types.id'), nullable=False)
     amount = db.Column(db.Numeric, nullable=False)
-    at_date = db.Column(db.Date, nullable=False, default=datetime.now())
+    at_date = db.Column(db.Date, nullable=False, default=datetime.today)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     transaction_type = relationship('TransactionType', back_populates='transactions')
@@ -48,8 +48,8 @@ class Transaction(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'amount': self.amount,
-            'date': self.date.strftime('%Y-%m-%d')
+            'amount': float(self.amount),
+            'date': self.at_date.strftime('%Y-%m-%d')
         }
 
 @dataclass
